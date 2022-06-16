@@ -1,7 +1,11 @@
-Feature: Is it Friday yet?
-  Everybody wants to know when it's Friday
+Feature: Class
 
-  Scenario: Sunday isn't Friday
-    Given today is Sunday
-    When I ask whether it's Friday yet
-    Then I should be told "Nope"
+  Scenario: Login
+    Given I go to this url "https://habibmaternitycenter.momscradle.com/admin/login"
+    When I Login using user name "habib@in-school.net" and password "12345678"
+
+  Scenario: Class type CRUD
+    Given I go to class type
+    When I add class type
+    Then I edit class type
+    Then I remove class type
