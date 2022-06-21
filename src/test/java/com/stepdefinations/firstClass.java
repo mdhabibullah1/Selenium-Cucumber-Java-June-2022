@@ -1,6 +1,7 @@
 package com.stepdefinations;
 
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -8,8 +9,12 @@ import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 
 public class firstClass extends World {
@@ -26,13 +31,18 @@ public class firstClass extends World {
         world.driver = new ChromeDriver();
 
     }
-
-    @After
-    public void after() {
-        if (world.driver != null) {
-            world.driver.close();
-        }
+    @AfterStep
+    public void afterStep(){
+        new WebDriverWait(world.driver, Duration.ofSeconds(world.timeOut)).until(
+                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
+
+//    @After
+//    public void after() {
+//        if (world.driver != null) {
+//            world.driver.close();
+//        }
+//    }
 
     @Given("I go to this url {string}")
     public void i_go_to_this_url(String url) {
@@ -102,10 +112,11 @@ public class firstClass extends World {
     @Then("I add class")
     public void i_add_class() {
         world.driverWait("//input[@name='title']").sendKeys("Automation Test CRUD");
-        Select classType = new Select(world.driverWait("//select[@name='type']"));
-        classType.selectByIndex(0);
-        //classType.selectByVisibleText("Great Expectations");
-        //classType.selectByValue("Great Expectations");
+        WebElement dropdown = world.driverWait("//label[text()='Class Type']//parent::div//select");
+        Select classType = new Select(dropdown);
+        System.out.println(classType);
+        classType.selectByIndex(1);
+
         world.driverWait("//input[@name='year']").sendKeys("2022");
         world.driverWait("//input[@name='fee']").sendKeys("200");
         world.driverWait("//textarea").sendKeys("Lorem ipsum is simply dummy text");
