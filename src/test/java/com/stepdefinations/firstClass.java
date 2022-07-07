@@ -37,12 +37,12 @@ public class firstClass extends World {
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
 
-//    @After
-//    public void after() {
-//        if (world.driver != null) {
-//            world.driver.close();
-//        }
-//    }
+    @After
+    public void after() {
+        if (world.driver != null) {
+            world.driver.close();
+        }
+    }
 
     @Given("I go to this url {string}")
     public void i_go_to_this_url(String url) {
@@ -74,8 +74,7 @@ public class firstClass extends World {
         world.driverWait("//button[contains(text(), 'Save')]").click();
 
         String classType_ADD = world.driverWait("//div[@class='toast-message']").getText();
-//        assert classType_ADD == "success";
-        System.out.println(classType_ADD);
+        assert classType_ADD.contains("success");
 
     }
     @Then("I edit class type")
@@ -87,8 +86,7 @@ public class firstClass extends World {
         world.driverWait("//button[contains(text(), 'Save')]").click();
 
         String classType_EDIT = world.driverWait("//div[@class='toast-message']").getText();
-//        assert classType_EDIT == "success";
-        System.out.println(classType_EDIT);
+        assert classType_EDIT.contains("success");
 
     }
     @Then("I remove class type")
@@ -97,8 +95,7 @@ public class firstClass extends World {
         world.driverWait("//button[@class=\"btn btn-primary\"]").click();
 
         String classType_REMOVE = world.driverWait("//div[@class='toast-message']").getText();
-//        assert classType_REMOVE == "success";
-        System.out.println(classType_REMOVE);
+        assert classType_REMOVE.contains("success");
 
     }
     @Then("I go to class")
@@ -124,8 +121,7 @@ public class firstClass extends World {
         world.driverWait("//button[contains(text(), 'Save')]").click();
 
         String CLASS_ADD = world.driverWait("//div[@class='toast-message']").getText();
-//        assert CLASS_ADD =="success";
-        System.out.println(CLASS_ADD);
+        assert CLASS_ADD.contains("success");
     }
     @Then("I edit class")
     public void i_edit_class() {
@@ -143,8 +139,7 @@ public class firstClass extends World {
         world.driverWait("//button[contains(text(), 'Save')]").click();
 
         String CLASS_EDIT = world.driverWait("//div[@class='toast-message']").getText();
-//        assert CLASS_EDIT =="success";
-        System.out.println(CLASS_EDIT);
+        assert CLASS_EDIT.contains("success");
     }
     @Then("I remove class")
     public void i_remove_class() {
@@ -159,9 +154,51 @@ public class firstClass extends World {
         world.driverWait("//button[@class=\"btn btn-primary\"]").click();
 
         String CLASS_REMOVE = world.driverWait("//div[@class='toast-message']").getText();
-//        assert CLASS_REMOVE =="success";
-        System.out.println(CLASS_REMOVE);
+        assert CLASS_REMOVE.contains("success");
     }
 
 
+    @Then("I go to POS")
+    public void i_go_to_pos() {
+        world.driverWait("(//div[@data-v-step=\"3\"]//li)[1]").click();
+        world.driverWait("//button[contains(text(), 'Walk-in Client')]").click();
+        //world.driverWait("//input[@placeholder=\"Search User\"]").sendKeys("user");
+
+    }
+    @Then("Select & Pay for class")
+    public void select_pay_for_class() {
+
+        WebElement dropdown = world.driverWait("//select[@class=\"form-control\"]");
+        Select POSclass = new Select(dropdown);
+        dropdown.click();
+        System.out.println(POSclass);
+        POSclass.selectByIndex(1);
+
+        world.driverWait("(//td)[1]").click();
+        world.driverWait("//button[contains(text(), ' Add to Cart ')]").click();
+
+        String Added_to_Cart = world.driverWait("//div[@class='toast-message']").getText();
+        assert Added_to_Cart.contains("success");
+
+
+//        JavascriptExecutor js = (JavascriptExecutor) world.driver;
+//        js.executeScript("window.scrollBy(0,-1900)");
+        ((JavascriptExecutor) world.driver).executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+
+        world.driverWait("//button[contains(text(), 'Checkout')]").click();
+        world.driverWait("//button[contains(text(), 'Provide Payment Info')]").click();
+        world.driverWait("//button[contains(text(), ' Order Preview ')]").click();
+        world.driverWait("//button[contains(text(), ' Make Payment ')]").click();
+        world.driverWait("//input[@id=\"cardNumber\"]").sendKeys("4111111111111111");
+        world.driverWait("//input[@id=\"cardExpiry\"]").sendKeys("09/30");
+        world.driverWait("//input[@id=\"cardCvc\"]").sendKeys("123");
+        world.driverWait("//input[@id=\"billingName\"]").sendKeys("Md Habibullah Mia");
+        world.driverWait("//button[@type=\"submit\"]").click();
+
+//        String POS_Class = world.driverWait("//div[@class='toast-message']").getText();
+//        assert POS_Class.contains("success");
+
+
+        //world.driverWait("").click();
+    }
 }
