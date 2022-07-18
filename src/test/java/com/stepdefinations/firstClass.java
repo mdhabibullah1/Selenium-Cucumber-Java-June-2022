@@ -37,7 +37,7 @@ public class firstClass extends World {
         new WebDriverWait(world.driver, Duration.ofSeconds(world.timeOut)).until(
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
-//
+
 //    @After
 //    public void after() {
 //        if (world.driver != null) {
@@ -313,6 +313,80 @@ public class firstClass extends World {
 //        assert ProductOrderPlaced.contains("success");
 //    }
 
+
+    @Then("I go to Health Insurance")
+    public void i_go_to_health_insurance() {
+        world.driverWait("//span[contains(text(),'CMS')]").click();
+        world.driverWait("//a[contains(text(), 'Other Information')]").click();
+    }
+    @Then("I add Health Insurance")
+    public void i_add_health_insurance() {
+        world.driverWait("//button[contains(text(), ' Add Health Insurance ')]").click();
+        world.driverWait("//input[@name='Insurance Name']").sendKeys("Automation CRUD");
+        world.driverWait("//button[@class='btn btn-sm btn-primary mr-2']").click();
+
+        String HealthInsuranceAdded = world.driverWait("//div[@class='toast-message']").getText();
+        assert HealthInsuranceAdded.contains("success");
+
+    }
+    @Then("I edit Health Insurance")
+    public void i_edit_health_insurance() {
+//        JavascriptExecutor js = (JavascriptExecutor) world.driverWait("//button[contains(text(), ' Add Health Insurance ')]");
+//        js.executeScript("window.scrollBy(0,-1900)");
+
+        ((JavascriptExecutor) world.driver).executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+
+        world.driverWait("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Edit')]").sendKeys("Automation CRUD Edited");
+        world.driverWait("//button[@class='btn btn-sm btn-primary mr-2']").click();
+
+        String HealthInsuranceUpdated = world.driverWait("//div[@class='toast-message']").getText();
+        assert HealthInsuranceUpdated.contains("success");
+
+    }
+    @Then("I remove Health Insurance")
+    public void i_remove_health_insurance() {
+//        JavascriptExecutor js = (JavascriptExecutor) world.driverWait("//button[contains(text(), ' Add Health Insurance ')]");
+//        js.executeScript("window.scrollBy(0,-1900)");
+
+        ((JavascriptExecutor) world.driver).executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+        world.driverWait("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Remove')]").click();
+        world.driverWait("//button[@class='btn btn-primary']").click();
+
+        String HealthInsuranceRemoved = world.driverWait("//div[@class='toast-message']").getText();
+        assert HealthInsuranceRemoved.contains("success");
+    }
+
+    @Then("I go to Delivery Hospital")
+    public void i_go_to_delivery_hospital() {
+        world.driverWait("//span[contains(text(),'CMS')]").click();
+        world.driverWait("//a[contains(text(), 'Other Information')]").click();
+        world.driverWait("//span[@class='menu-title' and contains(text(), 'Delivery Hospital')]").click();
+    }
+    @Then("I add Delivery Hospital")
+    public void i_add_delivery_hospital() {
+        world.driverWait("//button[contains(text(), 'Add Hospital')]").click();
+        world.driverWait("//input[@maxlength='500']").sendKeys("Automation CRUD");
+        world.driverWait("//button[contains(text(), 'Save')]").click();
+    }
+    @Then("I edit Delivery Hospital")
+    public void i_edit_delivery_hospital() {
+        //((JavascriptExecutor) world.driver).executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+
+        JavascriptExecutor jse = ((JavascriptExecutor) driver);
+        jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+
+        world.driverWait("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Edit')]").sendKeys("Automation CRUD Edited");
+        world.driverWait("//button[@class='btn btn-sm btn-primary mr-2']").click();
+    }
+    @Then("I remove Delivery Hospital")
+    public void i_remove_delivery_hospital() {
+      //  ((JavascriptExecutor) world.driver).executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+
+        JavascriptExecutor jse = ((JavascriptExecutor) driver);
+        jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        world.driverWait("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Remove')]").click();
+        world.driverWait("//button[@class='btn btn-primary']").click();
+    }
         //world.driverWait("").click();
 
 }
