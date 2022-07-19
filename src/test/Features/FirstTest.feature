@@ -20,12 +20,12 @@ Feature: Class
 #    Then I edit class
 #    Then I remove class
 
-#  Scenario: POS Class
-#    Given I go to this url "https://habibmaternitycenter.momscradle.com/admin/login"
-#    When I Login using user name "habib@in-school.net" and password "12345678"
-#    Then I go to POS
-#    Then I Select class
-#    Then I make payment
+  Scenario: POS Class
+    Given I go to this url "https://habibmaternitycenter.momscradle.com/admin/login"
+    When I Login using user name "habib@in-school.net" and password "12345678"
+    Then I go to POS
+    Then I Select class
+    Then I make payment
 
 #  Scenario: POS Product
 #    Given I go to this url "https://habibmaternitycenter.momscradle.com/admin/login"
@@ -49,10 +49,15 @@ Feature: Class
 #    Then I edit Health Insurance
 #    Then I remove Health Insurance
 
-  Scenario: Delivery Hospital CRUD
-    Given I go to this url "https://habibmaternitycenter.momscradle.com/admin/login"
-    When I Login using user name "habib@in-school.net" and password "12345678"
-    Then I go to Delivery Hospital
-    Then I add Delivery Hospital
-    Then I edit Delivery Hospital
-    Then I remove Delivery Hospital
+#  Scenario: Delivery Hospital CRUD
+#    Given I go to this url "https://habibmaternitycenter.momscradle.com/admin/login"
+#    When I Login using user name "habib@in-school.net" and password "12345678"
+#    Then I go to Delivery Hospital
+#    Then I add Delivery Hospital
+#    Then I edit Delivery Hospital
+#    Then I remove Delivery Hospital
+
+#  Scenario: Here About us CRUD
+#    Given I go to this url "https://habibmaternitycenter.momscradle.com/admin/login"
+#    When I Login using user name "habib@in-school.net" and password "12345678"
+#    Then I go to Here About us
