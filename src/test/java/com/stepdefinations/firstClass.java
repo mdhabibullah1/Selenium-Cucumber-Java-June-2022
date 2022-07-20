@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -32,18 +33,18 @@ public class firstClass extends World {
 
     }
 
-    @AfterStep
-    public void afterStep() {
-        new WebDriverWait(world.driver, Duration.ofSeconds(world.timeOut)).until(
-                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
-    }
+//    @AfterStep
+//    public void afterStep() {
+//        new WebDriverWait(world.driver, Duration.ofSeconds(world.timeOut)).until(
+//                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+//    }
 
-    @After
-    public void after() {
-        if (world.driver != null) {
-            world.driver.close();
-        }
-    }
+//    @After
+//    public void after() {
+//        if (world.driver != null) {
+//            world.driver.close();
+//        }
+//    }
 
     @Given("I go to this url {string}")
     public void i_go_to_this_url(String url) {
@@ -52,7 +53,7 @@ public class firstClass extends World {
 
     @When("I Login using user name {string} and password {string}")
     public void i_login_using_user_name_and_password(String userName, String password) {
-        world.driver.manage().window().maximize();
+        //world.driver.manage().window().maximize();
         world.driverWait("//input[@id='email']").sendKeys(userName);
         world.driverWait("//input[@name='password']").sendKeys(password);
         world.driverWait("//button[@class=\"btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn\"]").click();
@@ -169,8 +170,11 @@ public class firstClass extends World {
         world.driverWait("//input[@name='Insurance Name']").sendKeys("Automation CRUD");
         world.driverWait("//button[@class='btn btn-sm btn-primary mr-2']").click();
 
-        String HealthInsuranceAdded = world.driverWait("//div[@class='toast-message']").getText();
-        assert HealthInsuranceAdded.contains("success");
+//        String HealthInsuranceAdded = world.driverWait("//div[@class='toast-message']").getText();
+//        assert HealthInsuranceAdded.contains("success");
+
+         // ((JavascriptExecutor) world.driver).executeScript("0, window.scrollTo(document.body.scrollHeight)");
+          ((JavascriptExecutor) world.driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
 
     }
     @Then("I edit Health Insurance")
@@ -178,7 +182,10 @@ public class firstClass extends World {
 //        JavascriptExecutor js = (JavascriptExecutor) world.driverWait("//button[contains(text(), ' Add Health Insurance ')]");
 //        js.executeScript("window.scrollBy(0,-1900)");
 
-        ((JavascriptExecutor) world.driver).executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+
+//        WebElement editBtn = world.driver.findElement(By.xpath("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Edit')]"));
+//
+//        new Actions(world.driver).moveToElement(editBtn).perform();
 
         world.driverWait("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Edit')]").sendKeys("Automation CRUD Edited");
         world.driverWait("//button[@class='btn btn-sm btn-primary mr-2']").click();

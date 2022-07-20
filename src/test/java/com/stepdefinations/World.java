@@ -11,7 +11,7 @@ import java.time.Duration;
 public class World {
     public String Habibullah;
     public WebDriver driver;
-    public int timeOut = 300;
+    public int timeOut = 60;
 
 //    public WebElement driverWait(String xpath){
 //        // Initialize and wait till element(link) became clickable - timeout in 10 seconds
