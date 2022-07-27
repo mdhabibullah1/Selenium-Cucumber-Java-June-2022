@@ -9,6 +9,7 @@ import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -39,27 +40,29 @@ public class firstClass extends World {
 //                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
 //    }
 
-//    @After
-//    public void after() {
-//        if (world.driver != null) {
-//            world.driver.close();
-//        }
-//    }
+    @After
+    public void after() {
+        if (world.driver != null) {
+            world.driver.close();
+        }
+    }
 
     @Given("I go to this url {string}")
     public void i_go_to_this_url(String url) {
         world.driver.get(url);
     }
 
+
     @When("I Login using user name {string} and password {string}")
     public void i_login_using_user_name_and_password(String userName, String password) {
-        //world.driver.manage().window().maximize();
+        world.driver.manage().window().setPosition(new Point(-1900, 10));
+        world.driver.manage().window().maximize();
+
         world.driverWait("//input[@id='email']").sendKeys(userName);
         world.driverWait("//input[@name='password']").sendKeys(password);
         world.driverWait("//button[@class=\"btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn\"]").click();
 
         world.driverWait("//button[contains(text(), 'Skip')]").click();
-
         world.driverWait("(//span[@class=\"zmdi zmdi-menu\"])[1]").click();
     }
 
@@ -133,12 +136,6 @@ public class firstClass extends World {
 
     @Then("I edit class")
     public void i_edit_class() {
-//        world.driverWait("//input[@placeholder=\"Search Classes\"]").sendKeys("CRUD");
-//        world.driverWait("//button[contains(text(), 'Search')]").click();
-
-//        //to perform Scroll on application using Selenium
-//        JavascriptExecutor js = (JavascriptExecutor) driver;
-//        js.executeScript("window.scrollBy(0,-1900)", "");
 
         world.driverWait("//td[contains(text(), 'CRUD')]//a[contains(text(), 'Edit')]").click();
         world.driverWait("//input[@name='title']").click();
@@ -170,25 +167,24 @@ public class firstClass extends World {
         world.driverWait("//input[@name='Insurance Name']").sendKeys("Automation CRUD");
         world.driverWait("//button[@class='btn btn-sm btn-primary mr-2']").click();
 
-//        String HealthInsuranceAdded = world.driverWait("//div[@class='toast-message']").getText();
-//        assert HealthInsuranceAdded.contains("success");
+        JavascriptExecutor js = (JavascriptExecutor) world.driver;
+        js.executeScript("window.scrollBy(0,0)");
 
-         // ((JavascriptExecutor) world.driver).executeScript("0, window.scrollTo(document.body.scrollHeight)");
-          ((JavascriptExecutor) world.driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
-
+        String HealthInsuranceAdded = world.driverWait("//div[@class='toast-message']").getText();
+        assert HealthInsuranceAdded.contains("success");
     }
     @Then("I edit Health Insurance")
     public void i_edit_health_insurance() {
-//        JavascriptExecutor js = (JavascriptExecutor) world.driverWait("//button[contains(text(), ' Add Health Insurance ')]");
-//        js.executeScript("window.scrollBy(0,-1900)");
 
+        world.driverWait("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Edit')]").click();
+        world.driverWait("//input[@name=\"Insurance Name\"]").click();
+        world.driverWait("//input[@name=\"Insurance Name\"]").clear();
+        world.driverWait("//input[@name=\"Insurance Name\"]").sendKeys("Automation CRUD Edited");
 
-//        WebElement editBtn = world.driver.findElement(By.xpath("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Edit')]"));
-//
-//        new Actions(world.driver).moveToElement(editBtn).perform();
-
-        world.driverWait("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Edit')]").sendKeys("Automation CRUD Edited");
         world.driverWait("//button[@class='btn btn-sm btn-primary mr-2']").click();
+
+        JavascriptExecutor js = (JavascriptExecutor) world.driver;
+        js.executeScript("window.scrollBy(0,0)");
 
         String HealthInsuranceUpdated = world.driverWait("//div[@class='toast-message']").getText();
         assert HealthInsuranceUpdated.contains("success");
@@ -196,10 +192,7 @@ public class firstClass extends World {
     }
     @Then("I remove Health Insurance")
     public void i_remove_health_insurance() {
-//        JavascriptExecutor js = (JavascriptExecutor) world.driverWait("//button[contains(text(), ' Add Health Insurance ')]");
-//        js.executeScript("window.scrollBy(0,-1900)");
 
-        ((JavascriptExecutor) world.driver).executeScript("window.scrollTo(document.body.scrollHeight, 0)");
         world.driverWait("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Remove')]").click();
         world.driverWait("//button[@class='btn btn-primary']").click();
 
@@ -218,26 +211,81 @@ public class firstClass extends World {
         world.driverWait("//button[contains(text(), 'Add Hospital')]").click();
         world.driverWait("//input[@maxlength='500']").sendKeys("Automation CRUD");
         world.driverWait("//button[contains(text(), 'Save')]").click();
+
+        JavascriptExecutor js = (JavascriptExecutor) world.driver;
+        js.executeScript("window.scrollBy(0,0)");
+
+        String DeliveryHospitalAdded = world.driverWait("//div[@class='toast-message']").getText();
+        assert DeliveryHospitalAdded.contains("success");
     }
     @Then("I edit Delivery Hospital")
     public void i_edit_delivery_hospital() {
- //((JavascriptExecutor) world.driver).executeScript("window.scrollTo(document.body.scrollHeight, 0)");
 
-//        JavascriptExecutor jse = ((JavascriptExecutor) driver);
-//        jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-
-        world.driverWait("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Edit')]").sendKeys("Automation CRUD Edited");
+        world.driverWait("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Edit')]").click();
+        world.driverWait("//input[@name=\"Hospital Name\"]").click();
+        world.driverWait("//input[@name=\"Hospital Name\"]").clear();
+        world.driverWait("//input[@name=\"Hospital Name\"]").sendKeys("Automation CRUD Edited");
         world.driverWait("//button[@class='btn btn-sm btn-primary mr-2']").click();
-    }
+
+        JavascriptExecutor js = (JavascriptExecutor) world.driver;
+        js.executeScript("window.scrollBy(0,0)");
+
+        String DeliveryHospitalUpdated = world.driverWait("//div[@class='toast-message']").getText();
+        assert DeliveryHospitalUpdated.contains("success");
+        }
     @Then("I remove Delivery Hospital")
     public void i_remove_delivery_hospital() {
-//  ((JavascriptExecutor) world.driver).executeScript("window.scrollTo(document.body.scrollHeight, 0)");
-
-//        JavascriptExecutor jse = ((JavascriptExecutor) driver);
-//        jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 
         world.driverWait("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Remove')]").click();
         world.driverWait("//button[@class='btn btn-primary']").click();
+
+        String DeliveryHospitalRemoved = world.driverWait("//div[@class='toast-message']").getText();
+        assert DeliveryHospitalRemoved.contains("success");
+    }
+
+    @Then("I go to Here About us")
+    public void i_go_to_here_about_us() {
+        world.driverWait("//span[contains(text(),'CMS')]").click();
+        world.driverWait("//a[contains(text(), 'Other Information')]").click();
+        world.driverWait("//span[contains(text(), 'How did you hear about us')]").click();
+    }
+
+    @Then("I add Here About us")
+    public void i_add_here_about_us() {
+        world.driverWait("//button[contains(text(), ' Add \"How did you hear about us?\" ')]").click();
+        world.driverWait("//input[@maxlength='500']").sendKeys("Automation CRUD");
+        world.driverWait("//button[contains(text(), 'Save')]").click();
+
+        JavascriptExecutor js = (JavascriptExecutor) world.driver;
+        js.executeScript("window.scrollBy(0,0)");
+
+        String HereAboutusAdded = world.driverWait("//div[@class='toast-message']").getText();
+        assert HereAboutusAdded.contains("success");
+    }
+
+    @Then("I edit Here About us")
+    public void i_edit_here_about_us() {
+
+        world.driverWait("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Edit')]").click();
+        world.driverWait("//input[@maxlength='500']").click();
+        world.driverWait("//input[@maxlength='500']").clear();
+        world.driverWait("//input[@maxlength='500']").sendKeys("Automation CRUD Edited");
+        world.driverWait("//button[@class='btn btn-sm btn-primary mr-2']").click();
+
+        JavascriptExecutor js = (JavascriptExecutor) world.driver;
+        js.executeScript("window.scrollBy(0,0)");
+
+        String HereAboutusUpdated = world.driverWait("//div[@class='toast-message']").getText();
+        assert HereAboutusUpdated.contains("success");
+    }
+    @Then("I remove Here About us")
+    public void i_remove_here_about_us() {
+
+        world.driverWait("//span[contains(text(), 'CRUD')]//parent::td//following-sibling::td//a[contains(text(), 'Remove')]").click();
+        world.driverWait("//button[@class='btn btn-primary']").click();
+
+        String HereAboutusRemoved = world.driverWait("//div[@class='toast-message']").getText();
+        assert HereAboutusRemoved.contains("success");
     }
         //world.driverWait("").click();
 

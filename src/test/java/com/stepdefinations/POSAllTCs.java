@@ -43,8 +43,8 @@ public class POSAllTCs extends World{
     @Then("I make payment")
     public void i_make_payment() {
 
-//        JavascriptExecutor js = (JavascriptExecutor) world.driver;
-//        js.executeScript("window.scrollBy(0,-1900)");
+        JavascriptExecutor js = (JavascriptExecutor) world.driver;
+        js.executeScript("window.scrollBy(0,0)");
         ((JavascriptExecutor) world.driver).executeScript("window.scrollTo(document.body.scrollHeight, 0)");
 
         world.driverWait("//button[contains(text(), 'Checkout')]").click();

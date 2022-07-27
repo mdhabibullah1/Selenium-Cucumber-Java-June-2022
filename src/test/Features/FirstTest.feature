@@ -3,15 +3,15 @@ Feature: Class
 #  Scenario: Login
 #    Given I go to this url "https://habibmaternitycenter.momscradle.com/admin/login"
 #    When I Login using user name "habib@in-school.net" and password "12345678"
-#
+
 #  Scenario: Class type CRUD
-#    Given I go to this url "https://habibmaternitycenter.momscradle.com/admin/login"
+#    Given I go to this url "https://whrc.momscradle.com/admin/login"
 #    When I Login using user name "habib@in-school.net" and password "12345678"
 #    Then I go to class type
 #    Then I add class type
 #    Then I edit class type
 #    Then I remove class type
-#
+
 #  Scenario: Class CRUD
 #    Given I go to this url "https://habibmaternitycenter.momscradle.com/admin/login"
 #    When I Login using user name "habib@in-school.net" and password "12345678"
@@ -41,16 +41,16 @@ Feature: Class
 #    Then I Select Rental
 #    Then I make payment
 
-  Scenario: Health Insurance CRUD
-    Given I go to this url "https://habibmaternitycenter.momscradle.com/admin/login"
-    When I Login using user name "habib@in-school.net" and password "12345678"
-    Then I go to Health Insurance
-    Then I add Health Insurance
-    Then I edit Health Insurance
-    Then I remove Health Insurance
+#  Scenario: Health Insurance CRUD
+#    Given I go to this url "https://whrc.momscradle.com/admin/login"
+#    When I Login using user name "habib@in-school.net" and password "12345678"
+#    Then I go to Health Insurance
+#    Then I add Health Insurance
+#    Then I edit Health Insurance
+#    Then I remove Health Insurance
 
 #  Scenario: Delivery Hospital CRUD
-#    Given I go to this url "https://habibmaternitycenter.momscradle.com/admin/login"
+#    Given I go to this url "https://whrc.momscradle.com/admin/login"
 #    When I Login using user name "habib@in-school.net" and password "12345678"
 #    Then I go to Delivery Hospital
 #    Then I add Delivery Hospital
@@ -58,6 +58,10 @@ Feature: Class
 #    Then I remove Delivery Hospital
 
 #  Scenario: Here About us CRUD
-#    Given I go to this url "https://habibmaternitycenter.momscradle.com/admin/login"
+#    Given I go to this url "https://whrc.momscradle.com/admin/login"
 #    When I Login using user name "habib@in-school.net" and password "12345678"
 #    Then I go to Here About us
+#    Then I add Here About us
+#    Then I edit Here About us
+#    Then I remove Here About us
+
